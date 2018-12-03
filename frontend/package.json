@@ -30,6 +30,10 @@
     "eslint-plugin-vue": "^5.0.0-0",
     "vue-template-compiler": "^2.5.17"
   },
+  "prettier": {
+    "trailingComma": "all",
+    "singleQuote": true
+  },
   "eslintConfig": {
     "root": true,
     "env": {
