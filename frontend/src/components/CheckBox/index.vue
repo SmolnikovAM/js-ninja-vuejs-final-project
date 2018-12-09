@@ -1,5 +1,5 @@
 <template>
-  <div>CheckBox</div>
+  <span>CheckBox</span>
 </template>
 
 <script>

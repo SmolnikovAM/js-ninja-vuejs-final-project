@@ -1,5 +1,5 @@
 <template>
-  <div>DayOfWeek</div>
+  <span>DayOfWeek</span>
 </template>
 
 <script>

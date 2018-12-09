@@ -1,5 +1,5 @@
 <template>
-  <div>TimePicker</div>
+  <span>TimePicker</span>
 </template>
 
 <script>
