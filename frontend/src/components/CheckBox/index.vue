@@ -1,6 +1,6 @@
 <template>
   <label class="label-wrapper">
-    <input type="checkbox" class="input" :checked="checked" @change="$emit('change', !checked)">
+    <input type="checkbox" class="input" :checked="checked" @change="change">
     <span class="box">
       <span class="mark"></span>
     </span>
@@ -21,6 +21,11 @@ export default {
     checked: {
       type: Boolean,
       default: false,
+    },
+  },
+  methods: {
+    change() {
+      this.$emit(EVENT, !this.checked);
     },
   },
 };
