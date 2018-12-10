@@ -18,6 +18,6 @@ storiesOf(Component.name, module)
      <h4>checkBox01 {{ checkBox01 }}</h4>
      <component v-model="checkBox01"/>
      <h4>checkBox02 {{ checkBox02 }}</h4>
-     <component v-model="checkBox01"/>
+     <component v-model="checkBox02"/>
   </div>`,
   }));
