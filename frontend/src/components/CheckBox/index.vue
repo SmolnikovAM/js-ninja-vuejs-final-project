@@ -23,11 +23,6 @@ export default {
       default: false,
     },
   },
-  methods: {
-    change() {
-      this.$emit(EVENT, !this.checked);
-    },
-  },
 };
 </script>
 
