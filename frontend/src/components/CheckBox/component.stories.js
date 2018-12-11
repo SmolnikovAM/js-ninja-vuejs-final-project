@@ -13,6 +13,7 @@ storiesOf(Component.name, module)
       checkBox01: true,
       checkBox02: false,
       checkBox03: true,
+      checkBox04: true,
     }),
     mounted() {
       this.$refs.first.$el.focus();
@@ -31,5 +32,10 @@ storiesOf(Component.name, module)
      <span style="color:green">
       After text.
      </span>
+
+     <h4>checkBox04 {{ checkBox04 }}</h4>
+     <component v-model="checkBox04" tabindex="-1">
+      No focus
+     </component> 
   </div>`,
   }));

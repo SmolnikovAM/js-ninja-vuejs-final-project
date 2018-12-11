@@ -1,7 +1,7 @@
 <template>
-  <label class="label-wrapper">
+  <label class="label-wrapper" :tabindex="tabindex" @keypress.space="change">
     <input type="checkbox" class="input" tabindex="-1" :checked="checked" @change="change">
-    <span class="box" :tabindex="tabindex" @keypress.space="change">
+    <span class="box">
       <span class="mark" v-if="checked"></span>
     </span>
     <slot></slot>
@@ -23,7 +23,7 @@ export default {
       default: false,
     },
     tabindex: {
-      type: Number,
+      type: [Number, String],
       default: 0,
     },
   },
@@ -67,12 +67,16 @@ export default {
   vertical-align: -4px;
 }
 
-.box:focus {
+.label-wrapper:focus {
   outline: none;
 }
 
-.box:focus {
+.label-wrapper:focus > .box {
   border: 2px solid rgb(140, 208, 250);
+}
+
+.label-wrapper:active > .box {
+  border: 2px solid rgb(51, 112, 149);
 }
 
 .mark {
