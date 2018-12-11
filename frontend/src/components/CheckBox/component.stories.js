@@ -9,6 +9,7 @@ storiesOf(MyComponent.name, module).add(`display`, () => ({
     checkBox02: false,
     checkBox03: true,
     checkBox04: true,
+    checkBox05: true,
   }),
   mounted() {
     this.$refs.first.$el.focus();
@@ -32,5 +33,14 @@ storiesOf(MyComponent.name, module).add(`display`, () => ({
      <my-component v-model="checkBox04" tabindex="-1">
       No focus
      </my-component> 
+
+     <h4>checkBox05 {{ checkBox05 }}</h4>
+     <my-component v-model="checkBox05" disabled>
+     disabled checkbox
+     </my-component> 
+     
+     <hr>
+     <span tabindex="0">test focus tab</span>
+
   </div>`,
 }));

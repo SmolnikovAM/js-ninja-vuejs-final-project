@@ -1,8 +1,15 @@
 <template>
-  <label class="label-wrapper" :tabindex="tabindex" @keypress.space="change">
-    <input type="checkbox" class="input" tabindex="-1" :checked="checked" @change="change">
+  <label class="label-wrapper" :class="labelClass" :tabindex="isFocus" @keypress.space="change">
+    <input
+      type="checkbox"
+      class="input"
+      tabindex="-1"
+      :checked="checked"
+      @change="change"
+      :disabled="disabled"
+    >
     <span class="box">
-      <span class="mark" v-if="checked"></span>
+      <span class="mark" v-if="mark"></span>
     </span>
     <slot></slot>
   </label>
@@ -22,6 +29,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
     tabindex: {
       type: [Number, String],
       default: 0,
@@ -32,6 +43,17 @@ export default {
       this.$emit(EVENT, !this.checked);
     },
   },
+  computed: {
+    labelClass() {
+      return { gray: this.disabled };
+    },
+    mark() {
+      return !this.disabled && this.checked;
+    },
+    isFocus() {
+      return !this.disabled && this.tabindex;
+    },
+  },
 };
 </script>
 
@@ -39,6 +61,12 @@ export default {
 .label-wrapper {
   display: inline-block;
   position: relative;
+  cursor: pointer;
+}
+
+.gray {
+  color: gray;
+  cursor: default;
 }
 
 .input {
@@ -77,6 +105,11 @@ export default {
 
 .label-wrapper:active > .box {
   border: 2px solid rgb(51, 112, 149);
+}
+
+.input:disabled ~ .box {
+  border: 2px solid gray;
+  background-color: white;
 }
 
 .mark {
