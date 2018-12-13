@@ -1,5 +1,10 @@
 <template>
-  <label class="label-wrapper" :class="labelClass" :tabindex="isFocus" @keypress.space="change">
+  <label
+    class="label-wrapper"
+    :class="labelClass"
+    :tabindex="tabindexComputed"
+    @keypress.space="change"
+  >
     <input
       type="checkbox"
       class="input"
@@ -50,8 +55,9 @@ export default {
     mark() {
       return !this.disabled && this.checked;
     },
-    isFocus() {
-      return !this.disabled && this.tabindex;
+    tabindexComputed() {
+      const tabindex = this.disabled ? -1 : this.tabindex;
+      return tabindex;
     },
   },
 };
