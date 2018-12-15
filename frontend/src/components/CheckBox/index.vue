@@ -1,20 +1,16 @@
 <template>
-  <label
-    class="label-wrapper"
-    :class="labelClass"
-    :tabindex="tabindexComputed"
-    @keypress.space="change"
-  >
+  <label :class="labelClass">
     <input
       type="checkbox"
       class="input"
-      tabindex="-1"
+      :tabindex="tabindex"
       :checked="checked"
-      @change="change"
       :disabled="disabled"
+      ref="input"
+      @change="change"
     >
-    <span class="box">
-      <span class="mark" v-if="mark"></span>
+    <span :class="boxClass">
+      <span :class="markClass" v-if="checked"></span>
     </span>
     <slot></slot>
   </label>
@@ -42,35 +38,58 @@ export default {
       type: [Number, String],
       default: 0,
     },
+    autofocus: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  mounted() {
+    if (this.autofocus && !this.disabled) {
+      this.$refs.input.focus();
+    }
   },
   methods: {
-    change() {
+    change(e) {
       this.$emit(EVENT, !this.checked);
     },
   },
   computed: {
     labelClass() {
-      return { gray: this.disabled };
+      return {
+        'label-position': true,
+        'label-normal': !this.disabled,
+        'label-disabled': this.disabled,
+      };
     },
-    mark() {
-      return !this.disabled && this.checked;
+    boxClass() {
+      return {
+        'box-position': true,
+        'box-normal': !this.disabled,
+        'box-disabled': this.disabled,
+      };
     },
-    tabindexComputed() {
-      const tabindex = this.disabled ? -1 : this.tabindex;
-      return tabindex;
+    markClass() {
+      return {
+        'mark-position': true,
+        'mark-active': !this.disabled,
+        'mark-disable': this.disabled,
+      };
     },
   },
 };
 </script>
 
 <style scoped>
-.label-wrapper {
+.label-position {
   display: inline-block;
   position: relative;
+}
+
+.label-normal {
   cursor: pointer;
 }
 
-.gray {
+.label-disabled {
   color: gray;
   cursor: default;
 }
@@ -85,40 +104,42 @@ export default {
   bottom: 0;
 }
 
-.input:focus {
-  outline: none;
-}
-
-.box {
+.box-position {
   display: inline-block;
   height: 17px;
   width: 17px;
-  background-color: rgb(51, 112, 149, 0.6);
-  border: 2px solid rgb(51, 112, 149);
   border-radius: 4px;
   position: relative;
   margin-right: 3px;
   vertical-align: -4px;
 }
 
-.label-wrapper:focus {
-  outline: none;
-}
-
-.label-wrapper:focus > .box {
-  border: 2px solid rgb(140, 208, 250);
-}
-
-.label-wrapper:active > .box {
+.box-normal {
+  background-color: rgb(51, 112, 149, 0.6);
   border: 2px solid rgb(51, 112, 149);
 }
 
-.input:disabled ~ .box {
+.box-disabled {
   border: 2px solid gray;
   background-color: white;
 }
 
-.mark {
+.input:focus {
+  outline: none;
+}
+.input:focus ~ .box-normal,
+.input:active ~ .box-normal {
+  border: 2px solid rgba(166, 213, 243, 0.822);
+}
+
+.mark-active {
+  border: solid white;
+}
+
+.mark-disable {
+  border: solid gray;
+}
+.mark-position {
   position: absolute;
   margin: 0;
   padding: 0;
@@ -126,9 +147,8 @@ export default {
   left: 2px;
   width: 60%;
   height: 40%;
-  border: solid white;
-  border-width: 0 0 3px 3px;
   transform: rotate(-45deg);
   border-radius: 3px;
+  border-width: 0 0 3px 3px;
 }
 </style>
