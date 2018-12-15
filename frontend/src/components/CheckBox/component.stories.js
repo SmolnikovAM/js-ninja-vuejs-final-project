@@ -10,15 +10,17 @@ storiesOf(MyComponent.name, module).add(`display`, () => ({
     checkBox03: true,
     checkBox04: true,
     checkBox05: true,
+    checkBox06: false,
   }),
   template: `
   <div>
-     <h4>checkBox01 {{ checkBox01 }}</h4>
+     <h4>Show checked. Value: {{ checkBox01 }}</h4>
      <my-component v-model="checkBox01" />
-     <h4>checkBox02 {{ checkBox02 }}</h4>
+     
+     <h4>Show unchecked with autofocus. Value: {{ checkBox02 }}</h4>
      <my-component v-model="checkBox02" autofocus/>
      
-     <h4>checkBox03 {{ checkBox03 }}</h4>
+     <h4>Slot text and outside text. Value: {{ checkBox03 }}</h4>
      <my-component v-model="checkBox03">
       Slot text.
      </my-component> 
@@ -26,16 +28,21 @@ storiesOf(MyComponent.name, module).add(`display`, () => ({
       After text.
      </span>
 
-     <h4>checkBox04 {{ checkBox04 }}</h4>
+     <h4>No tab select. tabindex="-1". Value: {{ checkBox04 }}</h4>
      <my-component v-model="checkBox04" tabindex="-1">
-      No focus
+      No focus by Tab
      </my-component> 
 
-     <h4>checkBox05 {{ checkBox05 }}</h4>
+     <h4>Disabled checkbox. Value: {{ checkBox05 }}</h4>
      <my-component v-model="checkBox05" disabled>
      disabled checkbox
      </my-component> 
      
+     <h4>Disabled checkbox. Value: {{ checkBox06 }}</h4>
+     <my-component v-model="checkBox06" disabled>
+     disabled checkbox
+     </my-component> 
+
      <hr>
      <span tabindex="0">test focus tab</span>
 
