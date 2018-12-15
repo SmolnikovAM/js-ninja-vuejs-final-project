@@ -11,15 +11,12 @@ storiesOf(MyComponent.name, module).add(`display`, () => ({
     checkBox04: true,
     checkBox05: true,
   }),
-  mounted() {
-    this.$refs.first.$el.focus();
-  },
   template: `
   <div>
      <h4>checkBox01 {{ checkBox01 }}</h4>
-     <my-component v-model="checkBox01"  ref="first"/>
+     <my-component v-model="checkBox01" />
      <h4>checkBox02 {{ checkBox02 }}</h4>
-     <my-component v-model="checkBox02"/>
+     <my-component v-model="checkBox02" autofocus/>
      
      <h4>checkBox03 {{ checkBox03 }}</h4>
      <my-component v-model="checkBox03">
