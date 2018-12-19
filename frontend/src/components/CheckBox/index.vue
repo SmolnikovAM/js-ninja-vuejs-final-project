@@ -72,7 +72,7 @@ export default {
       return {
         'mark-position': true,
         'mark-active': !this.disabled,
-        'mark-disable': this.disabled,
+        'mark-disabled': this.disabled,
       };
     },
   },
@@ -136,7 +136,7 @@ export default {
   border: solid white;
 }
 
-.mark-disable {
+.mark-disabled {
   border: solid gray;
 }
 .mark-position {
