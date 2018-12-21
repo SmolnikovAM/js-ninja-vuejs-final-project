@@ -2,17 +2,18 @@ import { storiesOf } from '@storybook/vue';
 
 import MyComponent from '.';
 
-storiesOf(MyComponent.name, module).add(`display`, () => ({
-  components: { MyComponent },
-  data: () => ({
-    checkBox01: true,
-    checkBox02: false,
-    checkBox03: true,
-    checkBox04: true,
-    checkBox05: true,
-    checkBox06: false,
-  }),
-  template: `
+storiesOf(MyComponent.name, module)
+  .add(`display`, () => ({
+    components: { MyComponent },
+    data: () => ({
+      checkBox01: true,
+      checkBox02: false,
+      checkBox03: true,
+      checkBox04: true,
+      checkBox05: true,
+      checkBox06: false,
+    }),
+    template: `
   <div>
      <h4>Show checked. Value: {{ checkBox01 }}</h4>
      <my-component v-model="checkBox01" />
@@ -47,4 +48,20 @@ storiesOf(MyComponent.name, module).add(`display`, () => ({
      <span tabindex="0">test focus tab</span>
 
   </div>`,
-}));
+  }))
+  .add(`tabindex test`, () => ({
+    components: { MyComponent },
+    template: `
+  <div>
+    <my-component tabindex=2>Second</my-component>
+    </br>
+    </br>
+    <my-component tabindex=0>Last</my-component>
+    </br>
+    </br>
+    <my-component autofocus tabindex=1>First</my-component>
+    </br>
+    </br>
+    <my-component tabindex=3>Third</my-component>     
+  </div>`,
+  }));
