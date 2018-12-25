@@ -2,9 +2,8 @@ import { storiesOf } from '@storybook/vue';
 
 import MyComponent from '.';
 
-storiesOf(MyComponent.name, module).add(
-  `display "${MyComponent.name}"`,
-  () => ({
+storiesOf(MyComponent.name, module)
+  .add(`display "${MyComponent.name}"`, () => ({
     components: { MyComponent },
     data: () => ({
       today: new Date(),
@@ -34,5 +33,36 @@ storiesOf(MyComponent.name, module).add(
         From string: <my-component :date="stringWed"/>
       </div>
     </div>`,
-  }),
-);
+  }))
+  .add(`customize style "${MyComponent.name}"`, () => {
+    const style = document.createElement('style');
+    const red = `component-class-${MyComponent.name}-red`;
+    const green = `component-class-${MyComponent.name}-green`;
+    style.innerHTML = `
+      .${red}{ color: red }
+      .${green}{ color: green }'
+    `;
+    document.body.appendChild(style);
+    return {
+      components: { MyComponent },
+      data: () => ({
+        today: new Date(),
+        color: red,
+      }),
+      computed: {
+        componentClass() {
+          return this.color ? { [this.color]: true } : {};
+        },
+      },
+      template: `
+  <div>
+    <my-component date="SUN" :class="componentClass"/>
+    <br><br>
+    color 
+    <select v-model="color">
+      <option value="${red}">red</option>
+      <option value="${green}">green</option>  
+    </select>
+  </div>`,
+    };
+  });
