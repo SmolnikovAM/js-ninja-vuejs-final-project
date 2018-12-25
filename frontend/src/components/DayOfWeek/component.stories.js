@@ -6,6 +6,33 @@ storiesOf(MyComponent.name, module).add(
   `display "${MyComponent.name}"`,
   () => ({
     components: { MyComponent },
-    template: `<div><my-component/></div>`,
+    data: () => ({
+      today: new Date(),
+      arrayTue: [2018, 11, 25],
+      stringWed: '2018-12-26',
+      todayFromNumber: Date.now(),
+      style: 'padding: 10px; margin: 10px; border: 1px solid black;',
+    }),
+    template: `
+    <div>
+      <div :style="style">
+       Simple display of "SUN"
+       <br>
+       <br>
+       <my-component date="SUN"/>
+      </div>
+      <div :style="style">
+        Today from date: <my-component :date="today"/>
+      </div>
+      <div :style="style">
+        Today From Number: <my-component :date="todayFromNumber"/>
+      </div>
+      <div :style="style">
+        Array: <my-component :date="arrayTue"/>
+      </div>
+      <div :style="style">
+        From string: <my-component :date="stringWed"/>
+      </div>
+    </div>`,
   }),
 );
