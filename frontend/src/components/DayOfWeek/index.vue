@@ -17,7 +17,7 @@ export default {
     dateCheck() {
       switch (true) {
         case this.date instanceof Array:
-          return new Date(...this.date);
+          return new Date(this.date);
         case typeof this.date === 'string' &&
           DAYS.indexOf(this.date.toUpperCase()) !== -1:
           return this.date.toUpperCase();
